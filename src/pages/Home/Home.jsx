@@ -7,26 +7,24 @@ import {
   DislikeOutlined,
 } from "@ant-design/icons";
 import { company } from "../../services";
-import DefaultLayout from "../../layouts/Default";
 
 const { Meta } = Card;
 
 const Company = (props) => {
   const history = useHistory();
-  const viewCompany = (route) => {
-    history.push(route);
+  const viewCompany = (id) => {
+    history.push(`/company/${id}`);
   };
   return (
     <Card
       style={{ width: 200 }}
       actions={[
         <LikeOutlined key="like" />,
-        <Badge
-          size="small"
-          count={props.reviews.length}
-          onClick={() => viewCompany(props.id)}
-        >
-          <CommentOutlined key="comments" />
+        <Badge size="small" count={props.reviews.length}>
+          <CommentOutlined
+            key="comments"
+            onClick={() => viewCompany(props._id)}
+          />
         </Badge>,
         <DislikeOutlined key="dislike" />,
       ]}
@@ -62,20 +60,16 @@ const Home = () => {
     fetchData();
   }, []);
 
-  return (
-    <DefaultLayout>
-      {items.length ? (
-        <Row gutter={16}>
-          {items.map((item) => (
-            <Col>
-              <Company {...item}></Company>
-            </Col>
-          ))}
-        </Row>
-      ) : (
-        <NoCompanies></NoCompanies>
-      )}
-    </DefaultLayout>
+  return items.length ? (
+    <Row gutter={16}>
+      {items.map((item, index) => (
+        <Col key={index}>
+          <Company {...item}></Company>
+        </Col>
+      ))}
+    </Row>
+  ) : (
+    <NoCompanies></NoCompanies>
   );
 };
 

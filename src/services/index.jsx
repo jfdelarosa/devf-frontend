@@ -14,4 +14,5 @@ export const auth = {
 
 export const company = {
   list: async () => await api.get("/company/"),
+  get: async (id) => await api.get(`/company/${id}`),
 };
