@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { Card, Empty, Button, Row, Col, Badge } from "antd";
 import {
   CommentOutlined,
@@ -6,16 +7,25 @@ import {
   DislikeOutlined,
 } from "@ant-design/icons";
 import { company } from "../../services";
+import DefaultLayout from "../../layouts/Default";
 
 const { Meta } = Card;
 
 const Company = (props) => {
+  const history = useHistory();
+  const viewCompany = (route) => {
+    history.push(route);
+  };
   return (
     <Card
       style={{ width: 200 }}
       actions={[
         <LikeOutlined key="like" />,
-        <Badge size="small" count={props.reviews.length}>
+        <Badge
+          size="small"
+          count={props.reviews.length}
+          onClick={() => viewCompany(props.id)}
+        >
           <CommentOutlined key="comments" />
         </Badge>,
         <DislikeOutlined key="dislike" />,
@@ -53,7 +63,7 @@ const Home = () => {
   }, []);
 
   return (
-    <>
+    <DefaultLayout>
       {items.length ? (
         <Row gutter={16}>
           {items.map((item) => (
@@ -65,7 +75,7 @@ const Home = () => {
       ) : (
         <NoCompanies></NoCompanies>
       )}
-    </>
+    </DefaultLayout>
   );
 };
 

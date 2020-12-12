@@ -1,20 +1,14 @@
-
-import React from 'react'
-import {
-  BrowserRouter as Router
-} from 'react-router-dom'
-import Routes from './Routs.js'
-import { AuthContextProvider } from './context/AuthContext.js'
+import React from "react";
+import { BrowserRouter as Router } from "react-router-dom";
+import Routes from "./Routs.js";
+import { AuthContextProvider } from "./context/AuthContext.js";
 
 function App() {
-
   return (
     <React.Fragment>
       <Router>
         <AuthContextProvider>
-          <div style={{ minHeight: '100vh', backgroundColor: '#F9F9F9' }}>
-            <Routes />
-          </div>
+          <Routes />
         </AuthContextProvider>
       </Router>
     </React.Fragment>
