@@ -9,5 +9,9 @@ const api = axios.create({
 
 export const auth = {
   signup: (body) => api.post("/auth/signup", body),
-  login: async (body) => api.post("/auth/login", body),
+  login: async (body) => await api.post("/auth/login", body),
+};
+
+export const company = {
+  list: async () => await api.get("/company/"),
 };
